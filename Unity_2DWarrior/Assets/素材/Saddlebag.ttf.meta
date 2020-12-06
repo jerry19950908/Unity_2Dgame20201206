@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 88ce520523a9404418434c078cc237ad
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Saddlebag
+  fontNames:
+  - Saddlebag
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 72917004304676544b694aaaf4134303, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
