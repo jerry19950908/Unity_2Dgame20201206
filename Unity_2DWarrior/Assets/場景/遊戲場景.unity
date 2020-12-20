@@ -36792,7 +36792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!199 &1605962965
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -36993,7 +36993,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4.5
+      scalar: 4
       minScalar: 2
       maxCurve:
         serializedVersion: 2
@@ -41964,6 +41964,7 @@ GameObject:
   - component: {fileID: 1917594021}
   - component: {fileID: 1917594020}
   - component: {fileID: 1917594019}
+  - component: {fileID: 1917594022}
   m_Layer: 0
   m_Name: "\u6230\u58EB"
   m_TagString: Untagged
@@ -42054,6 +42055,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1917594022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917594018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c498c0920e6df6b46a4a58805f72dd4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  speed: 10.5
+  height: 100
+  standfloor: 0
+  bullet: {fileID: 0}
+  bulletpos: {fileID: 0}
+  bulletspeed: 800
+  bulletsound: {fileID: 0}
 --- !u!1 &2012586767
 GameObject:
   m_ObjectHideFlags: 0
