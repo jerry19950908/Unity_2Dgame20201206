@@ -121,6 +121,49 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &598495795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 598495797}
+  - component: {fileID: 598495796}
+  m_Layer: 0
+  m_Name: "API\u7DF4\u7FD2"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &598495796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598495795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5991cd8c99a9c6b4d92ce728c2f2ac63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &598495797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598495795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811913771
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1811913772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +211,11 @@ MonoBehaviour:
   v4: {x: 2.8, y: 3.5, z: 4.7, w: 5.3}
   sprite: {fileID: 0}
   aud: {fileID: 0}
+  oba: {fileID: 0}
+  oba2: {fileID: 0}
+  tra: {fileID: 0}
+  cam: {fileID: 0}
+  rig: {fileID: 0}
 --- !u!65 &1811913773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -261,7 +309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1842140417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +337,11 @@ MonoBehaviour:
   v4: {x: 2.8, y: 3.5, z: 4.7, w: 5.3}
   sprite: {fileID: 0}
   aud: {fileID: 0}
+  oba: {fileID: 0}
+  oba2: {fileID: 0}
+  tra: {fileID: 0}
+  cam: {fileID: 0}
+  rig: {fileID: 0}
 --- !u!135 &1842140418
 SphereCollider:
   m_ObjectHideFlags: 0

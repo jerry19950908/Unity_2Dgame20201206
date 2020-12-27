@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region 欄位
     [Header("角色血量"), Range(0, 200)]
     public float hp = 100;
 
@@ -36,8 +37,51 @@ public class Player : MonoBehaviour
     //角色元件
     private Rigidbody2D rig;
     private Animator ani;
+    #endregion
 
+    #region 方法
 
+    /// <summary>
+    /// 移動方法
+    /// </summary>
+    private void Move()
+    {
+        
+    }
+
+    /// <summary>
+    /// 跳躍方法
+    /// </summary>
+    private void Jump()
+    {
+
+    }
+
+    /// <summary>
+    /// 開槍方法
+    /// </summary>
+    private void Fire()
+    {
+
+    }
+
+    /// <summary>
+    /// 受傷方法
+    /// </summary>
+    /// <param name="getdamage">受到傷害值</param>
+    private void Damage(float getdamage)
+    {
+
+    }
+
+    /// <summary>
+    /// 死亡方法
+    /// </summary>
+    private void Dead()
+    {
+
+    }
+    #endregion
 
 
 
