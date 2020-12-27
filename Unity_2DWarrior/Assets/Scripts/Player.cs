@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("角色血量"), Range(0, 200)]
-    public int hp = 100;
+    public float hp = 100;
 
     [Header("角色移動速度"), Range(0, 1000f)]
     public float speed = 10.5f;
@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     [Header("是否在地板上")]
     [Tooltip("是否跳躍在空中")]
-    public bool standfloor = false;
+    public bool isGround ;
 
     [Header("子彈")]
     [Tooltip("子彈")]
@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
     [Tooltip("子彈生成的位置")]
     public Transform bulletpos;
 
-    [Header("子彈速度"), Range(0, 5000f)]
-    public float bulletspeed = 800f;
+    [Header("子彈速度"), Range(0, 5000)]
+    public int bulletspeed = 800;
 
 
     [Header("音效")]
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private AudioSource aud;
 
     //角色元件
-    private Rigidbody2D rgb;
+    private Rigidbody2D rig;
     private Animator ani;
 
 
