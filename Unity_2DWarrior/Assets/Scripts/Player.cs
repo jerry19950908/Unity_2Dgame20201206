@@ -39,6 +39,39 @@ public class Player : MonoBehaviour
     private Animator ani;
     #endregion
 
+
+
+    /// <summary>
+    /// 取得玩家水平軸向的值
+    /// </summary>
+    public float h;
+
+    private void Start()
+    {
+        //欄位 = 取得元件<泛型>();
+        //泛型 : 泛指所有類型
+        rig = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
+    }
+
+
+
+    private void Update()
+    {
+        GetHorizontal();
+        Move();
+    }
+
+    /// <summary>
+    /// 取得水平軸向方法
+    /// </summary>
+    private void GetHorizontal()
+    {
+        //輸入.取得軸向("水平")
+        h = Input.GetAxis("Horizontal");
+    }
+    
+    
     #region 方法
 
     /// <summary>
@@ -46,7 +79,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Move()
     {
-        
+      //剛體.加速度 = 二維向量 ( 水平 * 速度, 原本加速度的y軸方向);
+        rig.velocity = new Vector2(h * speed, rig.velocity.y);
     }
 
     /// <summary>
