@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     [Header("子彈速度"), Range(0, 5000)]
     public int bulletspeed = 800;
 
+    [Header("地面判定位移")]
+    public Vector3 offset;
+    [Header("地面判定半徑")]
+    public float radius = 0.3f;
 
     [Header("音效")]
     [Tooltip("開槍音效")]
@@ -52,15 +56,23 @@ public class Player : MonoBehaviour
         //泛型 : 泛指所有類型
         rig = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
-    }
-
-
-
+    }  
     private void Update()
     {
         GetHorizontal();
         Move();
+        Jump();
     }
+
+    //在Unity內繪製圖示
+    private void OnDrawGizmos()
+    {
+        //圖示.顏色 = 顏色
+        Gizmos.color = new Color(1, 0, 0, 0.6f);
+        //圖示.繪製球體(中心點(玩家位置), 半徑)
+        Gizmos.DrawSphere(transform.position + offset, radius);
+    }
+
 
     /// <summary>
     /// 取得水平軸向方法
@@ -81,6 +93,27 @@ public class Player : MonoBehaviour
     {
       //剛體.加速度 = 二維向量 ( 水平 * 速度, 原本加速度的y軸方向);
         rig.velocity = new Vector2(h * speed, rig.velocity.y);
+
+       //如果玩家 按下 D鍵或者右鍵 就執行 {內容}
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            // 此 transform 指的是此腳本同一層的 transform元件，所以不需要命名欄位
+            // 物件的Rotation 在程式裡是 localEulerAngles
+            transform.localEulerAngles = Vector3.zero;
+        }
+
+
+        //如果玩家 按下 A鍵或者左鍵 就執行 {內容}
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            transform.localEulerAngles = new Vector3(0, 180 , 0);
+        }
+
+        //動畫控制器.設定布林值(參數， 布林值)
+        //當玩家按下左右鍵時，會起到跑步動畫(h不等於0)
+        ani.SetBool("跑步開關", h != 0);
+
+
     }
 
     /// <summary>
@@ -88,6 +121,32 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Jump()
     {
+        //如果 在地面上 並且 按下空白鍵 才可以執行跳躍動畫
+        if (isGround == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            rig.AddForce(new Vector2(0, height));  // 剛體.添加推力(二維向量);
+            isGround = false;                      // 不再地面上;
+
+            ani.SetTrigger("跳躍觸發");
+        }
+
+        //碰撞物件 = 2D物理.覆蓋圓形(中心點(玩家位置), 半徑 , 圖層)                   1 << 圖層編號
+        Collider2D hit = Physics2D.OverlapCircle(transform.position + offset, radius, 1 << 8);
+
+
+        //如果 碰到物件 是存在的 就把 是否在地面上 設定為 true
+        if (hit)
+        {
+            isGround = true;  //在地面上
+        }
+        //否則 沒有碰到物件 就把 是否在地面上 設定為 false
+        else
+        {
+            isGround = false;  //不在地面上
+        }
+
+        ani.SetFloat("跳躍數值", rig.velocity.y);  //動畫控制器.設定浮點數(參數,數值)
+        ani.SetBool("是否在地面上", isGround);
 
     }
 
