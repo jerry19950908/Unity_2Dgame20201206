@@ -56,12 +56,28 @@ public class Player : MonoBehaviour
         //泛型 : 泛指所有類型
         rig = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        aud = GetComponent<AudioSource>();
     }  
     private void Update()
     {
         GetHorizontal();
         Move();
         Jump();
+        Fire();
+    }
+
+    /// <summary>
+    /// 觸發事件 : Enter 進入時執行一次
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //如果(碰撞物件.標籤 = 鑰匙)
+        if (collision.tag == "鑰匙")
+        {
+            //刪除(碰撞物件)
+            Destroy(collision.gameObject);
+        }
     }
 
     //在Unity內繪製圖示
@@ -155,7 +171,14 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Fire()
     {
-
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            aud.PlayOneShot(bulletsound, Random.Range(1.2f, 1.5f));
+            //區域變數 = 生成(物件, 座標, 角度)
+            GameObject temp =  Instantiate(bullet, bulletpos.position, bulletpos.rotation);
+            //變數.取得元件(剛體).添加推力(生成點右邊 * 速度 + 生成點上方 * 高度)
+            temp.GetComponent<Rigidbody2D>().AddForce(bulletpos.right * bulletspeed + bulletpos.up * 150);
+        }
     }
 
     /// <summary>
