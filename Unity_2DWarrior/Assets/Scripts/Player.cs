@@ -36,11 +36,15 @@ public class Player : MonoBehaviour
     [Header("音效")]
     [Tooltip("開槍音效")]
     public AudioClip bulletsound;
-    private AudioSource aud;
+    [Tooltip("撿鑰匙音效")]
+    public AudioClip keysound;
+
+
 
     //角色元件
     private Rigidbody2D rig;
     private Animator ani;
+    private AudioSource aud;
     #endregion
 
 
@@ -77,6 +81,7 @@ public class Player : MonoBehaviour
         {
             //刪除(碰撞物件)
             Destroy(collision.gameObject);
+            aud.PlayOneShot(keysound, Random.Range(1.2f, 1.5f));
         }
     }
 
