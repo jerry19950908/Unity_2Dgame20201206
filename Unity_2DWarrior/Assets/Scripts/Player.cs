@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     [Header("子彈速度"), Range(0, 5000)]
     public int bulletspeed = 800;
 
+    [Header("子彈傷害"), Range(0, 5000)]
+    public int bulletdamage = 50;
+
+
     [Header("地面判定位移")]
     public Vector3 offset;
     [Header("地面判定半徑")]
@@ -69,7 +73,7 @@ public class Player : MonoBehaviour
         Jump();
         Fire();
     }
-
+    
     /// <summary>
     /// 觸發事件 : Enter 進入時執行一次
     /// </summary>
@@ -183,6 +187,8 @@ public class Player : MonoBehaviour
             GameObject temp =  Instantiate(bullet, bulletpos.position, bulletpos.rotation);
             //變數.取得元件(剛體).添加推力(生成點右邊 * 速度 + 生成點上方 * 高度)
             temp.GetComponent<Rigidbody2D>().AddForce(bulletpos.right * bulletspeed + bulletpos.up * 150);
+
+            temp.AddComponent<Bullet>().atk = bulletdamage;
         }
     }
 

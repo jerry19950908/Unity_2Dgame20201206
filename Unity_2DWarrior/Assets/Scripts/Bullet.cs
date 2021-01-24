@@ -19,6 +19,9 @@ public class Bullet : MonoBehaviour
           //對 Enemy呼叫 hit(atk)方法       
           collision.gameObject.GetComponent<Enemy>().hit(atk);
         }
+        
+        //刪除(此遊戲物件)
+        Destroy(gameObject);
     }
 
 
