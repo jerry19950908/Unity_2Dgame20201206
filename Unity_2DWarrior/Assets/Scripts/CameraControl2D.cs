@@ -7,6 +7,12 @@ public class CameraControl2D : MonoBehaviour
     public Transform target;
     [Header("追蹤速度")]
     public float speed = 3.5f;
+    [Header("晃動間隔"), Range(0, 1)]
+    public float shakeinterval = 0.05f;
+    [Header("晃動值"), Range(0, 5)]
+    public float shakevalue = 0.5f;
+    [Header("晃動次數"), Range(0, 10)]
+    public int shakeCount = 3;
 
     /// <summary>
     /// 追蹤目標物件
@@ -26,5 +32,22 @@ public class CameraControl2D : MonoBehaviour
     private void LateUpdate()
     {
         Track();
+    }
+
+    /// <summary>
+    /// 攻擊時晃動攝影機
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator shakeCamera()
+    {
+        //迴圈執行次數
+        for (int i = 0; i < shakeCount; i++)
+        {
+            //調整攝影機上下晃動
+            transform.position += Vector3.up * shakevalue;
+            yield return new WaitForSeconds(shakeinterval);
+            transform.position -= Vector3.up * shakevalue;
+            yield return new WaitForSeconds(shakeinterval);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
         aud = GetComponent<AudioSource>();
+        hpmax = hp;
     }  
     private void Update()
     {
@@ -192,13 +194,25 @@ public class Player : MonoBehaviour
         }
     }
 
+    [Header("血量文字")]
+    public Text texthp;
+    [Header("血量圖片")]
+    public Image imghp;
+    private float hpmax;  //最大血量
+
+
     /// <summary>
     /// 受傷方法
     /// </summary>
     /// <param name="getdamage">受到傷害值</param>
-    private void Damage(float getdamage)
+    public void Damage(float getdamage)
     {
+        hp -= getdamage;                   //魔王血量遞減 
+        ani.SetTrigger("受傷觸發");      //受傷動畫
+        texthp.text = hp.ToString();    //血量文字.文字內容 = 血量.轉為字串();
+        imghp.fillAmount = hp / hpmax;  //血量圖片.填滿長度 = 目前血量 / 最大血量;
 
+        if (hp <= 0) Dead();  //如果 血量 <= 0 執行死亡方法;
     }
 
     /// <summary>
@@ -206,7 +220,11 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Dead()
     {
-
+        hp = 0;
+        texthp.text = 0.ToString();
+        ani.SetBool("死亡開關", true);
+        enabled = false;  //死亡時,玩家腳本關掉
+        transform.Find("槍").gameObject.SetActive(false); //死亡時, 槍消失
     }
     #endregion
 
