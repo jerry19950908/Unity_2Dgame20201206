@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour
     private CameraControl2D cam;
     private float hpmax;  //最大血量
     private float timer;  //計時器
+    private bool Issecond; //是否發動第二次攻擊
+    private ParticleSystem psSecond;
 
 
     private void Start()
@@ -49,6 +51,8 @@ public class Enemy : MonoBehaviour
         hpmax = hp;
         player = FindObjectOfType<Player>();  // 透過類型尋找物件<類型>()  - 不能有重複物件
         cam = FindObjectOfType<CameraControl2D>();
+        psSecond = GameObject.Find("魔王第二階段攻擊特效").GetComponent<ParticleSystem>();
+
     }
 
     private void Update()
@@ -66,6 +70,9 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = new Color(0, 1, 0, 0.5f);  //綠色
         Gizmos.DrawCube(transform.position + transform.right * offsetAtk.x + transform.up * offsetAtk.y, sizeAtk);  //繪製正方體(魔王攻擊中心點 + 尺寸);
+
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.DrawSphere(transform.position, atkrange);
     }
 
 
@@ -83,6 +90,11 @@ public class Enemy : MonoBehaviour
         texthp.text = hp.ToString();    //血量文字.文字內容 = 血量.轉為字串();
         imghp.fillAmount = hp / hpmax;  //血量圖片.填滿長度 = 目前血量 / 最大血量;
 
+        if (hp <= hpmax * 0.8f)
+        {
+            Issecond = true; //進入第二次攻擊
+            atkrange = 20;  //血量低於八成, 進入攻擊第二階段
+        }
         if (hp <= 0) dead();  //如果 血量 <= 0 執行死亡方法;
     }
 
@@ -106,6 +118,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void move()
     {
+        //如果 動畫是 魔王攻擊 或者是 魔王受傷動畫 就跳出移動狀態
+        // 區域變數 = 動畫.取的目前動畫控制器圖層編號(編號)
+        AnimatorStateInfo info = ani.GetCurrentAnimatorStateInfo(0);
+        if (info.IsName("魔王_攻擊動畫") || info.IsName("魔王_受傷動畫")) return;
+
         /**  判斷式寫法
         if (transform.position.x > player.transform.position.x)
         {
@@ -180,6 +197,9 @@ public class Enemy : MonoBehaviour
         if (hit) player.Damage(atk);
         StartCoroutine(cam.shakeCamera());  //啟動協程(攝影機晃動效果)
 
+        //如果是第二階段 就播放第二次攻擊特效
+        if (Issecond) psSecond.Play();
+       
     }
 
 

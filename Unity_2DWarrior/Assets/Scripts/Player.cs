@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rig;
     private Animator ani;
     private AudioSource aud;
+    private SpriteRenderer spr;
     #endregion
 
 
@@ -67,6 +68,7 @@ public class Player : MonoBehaviour
         ani = GetComponent<Animator>();
         aud = GetComponent<AudioSource>();
         hpmax = hp;
+        spr = GetComponent<SpriteRenderer>();
     }  
     private void Update()
     {
@@ -118,6 +120,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Move()
     {
+      
       //剛體.加速度 = 二維向量 ( 水平 * 速度, 原本加速度的y軸方向);
         rig.velocity = new Vector2(h * speed, rig.velocity.y);
 
@@ -212,8 +215,30 @@ public class Player : MonoBehaviour
         texthp.text = hp.ToString();    //血量文字.文字內容 = 血量.轉為字串();
         imghp.fillAmount = hp / hpmax;  //血量圖片.填滿長度 = 目前血量 / 最大血量;
 
+        StartCoroutine(DamageEffect()); //啟動受傷效果協程
+
         if (hp <= 0) Dead();  //如果 血量 <= 0 執行死亡方法;
     }
+
+    /// <summary>
+    /// 受傷效果
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator DamageEffect()
+    {
+        Color red = new Color(1, 0.1f, 0.1f);   //受傷顏色(紅)
+        float interval = 0.05f;
+
+        for (int i = 0; i < 5; i++)
+        {
+            spr.color = red;                        //指定紅色 
+            yield return new WaitForSeconds(interval);  //等待
+            spr.color = Color.white;                //恢復白色
+            yield return new WaitForSeconds(interval);  //等待
+        }
+   
+    }
+
 
     /// <summary>
     /// 死亡方法
@@ -224,6 +249,7 @@ public class Player : MonoBehaviour
         texthp.text = 0.ToString();
         ani.SetBool("死亡開關", true);
         enabled = false;  //死亡時,玩家腳本關掉
+        rig.Sleep();
         transform.Find("槍").gameObject.SetActive(false); //死亡時, 槍消失
     }
     #endregion
