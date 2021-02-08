@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     [Tooltip("撿鑰匙音效")]
     public AudioClip keysound;
 
+    [Header("結束畫面")]
+    public GameObject panelGameOver;  //角色死亡後的結束畫面
 
 
     //角色元件
@@ -245,6 +247,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Dead()
     {
+        panelGameOver.SetActive(true);
         hp = 0;
         texthp.text = 0.ToString();
         ani.SetBool("死亡開關", true);
