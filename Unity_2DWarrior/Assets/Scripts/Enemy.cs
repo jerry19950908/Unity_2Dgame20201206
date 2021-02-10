@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
         ani = GetComponent<Animator>();
         rig = GetComponent <Rigidbody2D>();
         hpmax = hp;
+        texthp.text = hp.ToString();
         player = FindObjectOfType<Player>();  // 透過類型尋找物件<類型>()  - 不能有重複物件
         cam = FindObjectOfType<CameraControl2D>();
         psSecond = GameObject.Find("魔王第二階段攻擊特效").GetComponent<ParticleSystem>();
@@ -133,6 +134,7 @@ public class Enemy : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
         */
+
 
 
         //三元運算子 - 布林值 ? 結果 1 : 2 ;

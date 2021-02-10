@@ -38,6 +38,8 @@ public class SceneControl : MonoBehaviour
   /// </summary>
   public void BacktoMenu()
     {
+        Time.timeScale = 1;
+
         //音效.播放一次(音效來源, 音量大小);
         aud.PlayOneShot(soundclick, 1.5f);
 
@@ -57,6 +59,8 @@ public class SceneControl : MonoBehaviour
     /// </summary>
     public void QuitGame()
     {
+        Time.timeScale = 1;
+
         //音效.播放一次(音效來源, 音量大小);
         aud.PlayOneShot(soundclick, 1.5f);
 
